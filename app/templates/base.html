@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/{{ 'static' }}/css/style.css">
+    {% if title %}
+    <title>VocaPoint | {{ title }} </title>
+    {% else  %}
+    <title> VocaPoint </title>
+    {% endif %}
+  </head>
+  <body>
+    <nav>
+        <ul>
+        <li><a href="/index">Home</a></li>
+        <li><a href="/upload">Upload</a></li>
+        <li><a href="/keyword_mapping">Set Up</a></li>
+        <li><a href="/pages">Present</a></li>
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>

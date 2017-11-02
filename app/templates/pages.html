@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <div id="mySidenav" class="sidenav">
+    <a href="/index" id="exit">Exit</a>
+  </div>
+
+    <div id="mySidenav-left" class="sidenav">
+  {% if prev_id > 0 %}
+  <a id="previous" href="{{ url_for('display_pages', page=prev_id) }}">
+    Back</a>{% endif %}
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+  {% if next_id > 0 %}
+  <a id="next" href="{{ url_for('display_pages', page=next_id) }}">
+  Next</a>{% endif %}
+    </div>
+
+  {% if next_id == 1 %}
+      <img class="pages" src="../static/startimage.png" alt="test picture"/>
+    <button class="btn"><a href="{{ url_for('display_pages', page=next_id) }}">Start Slide Show</a></button>
+  {% endif %}
+    
+
+    <img class="pages" src="{{url_for('static', filename=this_filename)}}" alt="test picture"/>
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          window.location.replace("{{ url_for('display_pages',page=1)}}");
+      });
+</script> 
+{% endblock %}
