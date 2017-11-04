@@ -1,27 +1,38 @@
 {% extends "base.html" %}    
 {% block content %}
-<title>Upload new File</title>
 <div class="background">
 <!-- <h2>Upload new File</h2> -->
-<form method="POST">
-	<input type="text" 
-	class="form-control"
-	placeholder="Key" 
-	name="key" value="{{request.form.key}}">
-	
-	<input type="text" 
-	class="form-control"
-	placeholder="Decoded"
-	name="decoded" value="{{ decoded }}">
-	
-	<input type="submit" name="submit" value="encode">
-	<input type="submit" name="submit" value="decode">
+    
+<div class="caption">        
+<h1>{{ action }} a Message</h1>
 
-	<input type="text" 
-	class="form-control"
-	placeholder="Encoded"
-	name="encoded"  value="{{ encoded }}">
+<form method="POST">
+
+	<div class="form-group row">
+		<div class="col-sm-12">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Enter Message</span>
+				<input type="text" class="form-control" name="message" value="{{ message }}">
+			</div>
+		</div>
+	</div>
+		
+	<div class="form-group row">
+				<div class="col-sm-12">
+		<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Select Key</span>
+				<input class="form-control" type="number" value="{{ key }}" id="key" min="1" max="26" name="key">
+			</div>
+		</div>
+	</div>
+	
+	<input type="submit" class="btn btn-success btn-block" name="submit" value="Submit"/>
+
+	
+    <h2> {{ result }} </h2>
 	
 </form>
+
+    </div>
 </div>
 {% endblock %}

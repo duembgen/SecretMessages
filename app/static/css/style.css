@@ -26,25 +26,11 @@ div.img img {
     height: auto;
 }
 
-/* full with images */
-.pages {
-    min-height:70%;
-    min-width:70%;
-    /*height:auto;
-    width:auto;
-    position:absolute;
-    top:-100%; bottom:-100%;
-    left:-100%; right:-100%;
-    margin:auto;*/
-}
-
 /* full with background on index page */
 .background {
     /* The image used */
     background-image: url("../berge.png");
-
     height: 100%;
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -58,7 +44,7 @@ div.img img {
     text-align: center;
     color: #000;
     background-color: #fff;
-    opacity: 0.6;
+    opacity: 0.8;
     border-radius: 10px;
 }
 
@@ -70,31 +56,11 @@ div.img img {
     text-align: center;
     color: #000;
     background-color: #fff;
-    opacity: 0.6;
+    opacity: 0.8;
     border-radius: 10px;
     float: left;
 }
 
-.upload {
-    position: absolute;
-    top: 30%;
-    left: 20px;
-    right: 20px;
-    background-color: #fff;
-    opacity: 0.6;
-    border-radius: 10px;
-}
-
-.buttons {
-    postion: absolute;
-}
-
-.btn {
-    background-color: white;
-    color: black;
-    border: 2px solid #000;
-    margin-bottom: 10px;
-}
 
 a {
     color: #000;
@@ -133,61 +99,8 @@ h2 {
     /*padding-top: 40px;*/
     color: #000;
     background-color: #fff;
-    opacity: 0.6;
+    opacity: 0.8;
     display:inline-block;
-}
-
-/* Style the links inside the sidenav */
-#mySidenav a {
-    position: absolute; /* Position them relative to the browser window */
-    right: -80px; /* Position them outside of the screen */
-    transition: 0.3s; /* Add transition on hover */
-    padding: 15px; /* 15px padding */
-    width: 100px; /* Set a specific width */
-    text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Increase font size */
-    color: white; /* White text color */
-}
-
-#mySidenav-left a {
-    position: absolute; /* Position them relative to the browser window */
-    left: -80px; /* Position them outside of the screen */
-    transition: 0.3s; /* Add transition on hover */
-    padding: 15px; /* 15px padding */
-    width: 100px; /* Set a specific width */
-    text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Increase font size */
-    color: white; /* White text color */
-    text-align: right;
-}
-
-#mySidenav a:hover {
-    right: 0;
-}
-
-#mySidenav-left a:hover {
-    left: 0;
-}
-
-/* The about link: 20px from the top with a green background */
-#exit {
-    top: 140px;
-    right: 0px;
-    background-color: darkslategray;
-}
-
-#previous{
-    top: 70px;
-    left: 0px;
-    background-color: darkslategray;
-
-}
-
-#next {
-    top: 70px;
-    right: 0px;
-    background-color: darkslategray;
-
 }
 
 /* style images on index page */
@@ -198,22 +111,3 @@ h2 {
     opacity: 0.9;
 }
 
-
-input#keyword-submit {
-    margin-left:50%;
-}
-
-/* style button on keyword_mapping.html */
-#btn-bottom {
-    width: 200px;
-    margin: 20px;
-    bottom: 10px;
-    left: 300px;
-}
-
-.btn-save {
-    width: 200px;
-    margin: 20px;
-    bottom: 0;
-    left: 40%;
-}

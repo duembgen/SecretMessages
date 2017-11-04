@@ -5,10 +5,10 @@ from werkzeug.utils import secure_filename
 from app import app 
 
 def decode_message(message, key):
-    return 'decoded {}'.format(message)
+    return 'decoded "{}" with key {}'.format(message, key)
 	
 def encode_message(message, key):
-    return 'encoded {}'.format(message)
+    return 'encoded "{}" with key {}'.format(message, key)
 
 
 @app.route('/')
@@ -17,22 +17,28 @@ def index():
     print('showing index...', file=sys.stderr)
     return render_template('index.html', title='Home')
 	
-@app.route('/messages/', methods=['GET', 'POST'])
-def messages():
+@app.route('/encode/', methods=['GET', 'POST'])
+def encode():
+    if request.method == 'POST':
+        print('got POST', request.form, file=sys.stderr)
+        key = request.form.get('key', None)
+
+        flash('encode')
+        decoded = request.form.get('message', None)
+        encoded = encode_message(decoded, key)
+        return render_template('messages.html', result=encoded, message='', key=key, action="Write")
+
+    return render_template("messages.html", key=1, action="Write")
+
+@app.route('/decode/', methods=['GET', 'POST'])
+def decode():
     if request.method == 'POST':
         print('got POST', request.form, file=sys.stderr)
         key = request.form.get('key', None)
         
-        if "decode" in request.form.values():
-            flash('decode')
-            encoded = request.form.get('encoded', None)
-            decoded = decode_message(encoded, key)
-            return render_template('messages.html', decoded=decoded, encoded=encoded)
+        flash('decode')
+        encoded = request.form.get('message', None)
+        decoded = decode_message(encoded, key)
+        return render_template('messages.html', message=encoded, result=decoded, key=key, action="Read")
 
-        elif "encode" in request.form.values():
-            flash('encode')
-            decoded = request.form.get('decoded', None)
-            encoded = encode_message(decoded, key)
-            return render_template('messages.html', encoded=encoded, decoded='')
-
-    return render_template("messages.html")
+    return render_template("messages.html", key=1, action="Read")
