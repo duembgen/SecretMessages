@@ -1,7 +1,0 @@
-### website stuff
-
-flask
-sqlalchemy
-sqlalchemy-migrate
-flask-sqlalchemy 
-
