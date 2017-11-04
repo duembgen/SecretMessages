@@ -1,0 +1,19 @@
+{% extends "base.html" %}    
+{% block content %}
+<title>Upload new File</title>
+<div class="background">
+<!-- <h2>Upload new File</h2> -->
+<form method="POST">
+	<div class="message">
+		<label>Decoded: </label>
+		<input type="text" name="decoded">
+	</div>
+	<button class="btn-up" id="btn-bottom"><a href="#">Decode</a></button>
+	<button class="btn-down" id="btn-bottom"><a href="#">Encode</a></button>
+	<div class="message">
+		<label>Encoded: </label>
+		<input type="text" name="encoded">
+	</div>
+</form>
+</div>
+{% endblock %}
