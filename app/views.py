@@ -8,7 +8,18 @@ def decode_message(message, key):
     return 'decoded "{}" with key {}'.format(message, key)
 	
 def encode_message(message, key):
-    return 'encoded "{}" with key {}'.format(message, key)
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    newMessage = ''
+    key = int(key)
+    for character in message:
+        if character in alphabet:
+            position = alphabet.find(character)
+            newPosition = (position + key) % 26
+            newCharacter = alphabet[newPosition]
+            newMessage += newCharacter
+        else:
+            newMessage += character
+    return 'encoded "{}" with key {}'.format(newMessage, key)
 
 
 @app.route('/')
