@@ -48,7 +48,7 @@ def decode_message(message, key):
     for character in message:
         if character in alphabet:
             position = alphabet.find(character)
-            newPosition = (position + key) % 26
+            newPosition = (position - key) % 26
             newCharacter = alphabet[newPosition]
             newMessage += newCharacter
         else:
