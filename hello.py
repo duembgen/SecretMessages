@@ -1,6 +1,45 @@
-import os, sys
-from flask import flash, render_template, request, redirect, url_for, g
-from app import app 
+from cloudant import Cloudant
+from flask import Flask, render_template, request, jsonify, flash, url_for, g, redirect
+import atexit
+import cf_deployment_tracker
+import os
+import sys
+import json
+
+# Emit Bluemix deployment event
+cf_deployment_tracker.track()
+
+app = Flask(__name__)
+app.config.from_object('config')
+
+db_name = 'mydb'
+client = None
+db = None
+
+if 'VCAP_SERVICES' in os.environ:
+    vcap = json.loads(os.getenv('VCAP_SERVICES'))
+    print('Found VCAP_SERVICES')
+    if 'cloudantNoSQLDB' in vcap:
+        creds = vcap['cloudantNoSQLDB'][0]['credentials']
+        user = creds['username']
+        password = creds['password']
+        url = 'https://' + creds['host']
+        client = Cloudant(user, password, url=url, connect=True)
+        db = client.create_database(db_name, throw_on_exists=False)
+elif os.path.isfile('vcap-local.json'):
+    with open('vcap-local.json') as f:
+        vcap = json.load(f)
+        print('Found local VCAP_SERVICES')
+        creds = vcap['services']['cloudantNoSQLDB'][0]['credentials']
+        user = creds['username']
+        password = creds['password']
+        url = 'https://' + creds['host']
+        client = Cloudant(user, password, url=url, connect=True)
+        db = client.create_database(db_name, throw_on_exists=False)
+
+# On Bluemix, get the port number from the environment variable PORT
+# When running this app on the local machine, default the port to 8000
+port = int(os.getenv('PORT', 8000))
 
 def decode_message(message, key):
     return 'decoded "{}" with key {}'.format(message, key)
@@ -51,3 +90,11 @@ def decode():
         return render_template('messages.html', message=encoded, result=decoded, key=key, action="Read")
 
     return render_template("messages.html", key=1, action="Read")
+
+@atexit.register
+def shutdown():
+    if client:
+        client.disconnect()
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=port, debug=True)
