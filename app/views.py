@@ -1,7 +1,5 @@
 import os, sys
-import time
 from flask import flash, render_template, request, redirect, url_for, g
-from werkzeug.utils import secure_filename
 from app import app 
 
 def decode_message(message, key):
