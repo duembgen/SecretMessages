@@ -1,0 +1,5 @@
+---
+applications:
+ - name: secret_messages_gc
+   random-route: true
+
